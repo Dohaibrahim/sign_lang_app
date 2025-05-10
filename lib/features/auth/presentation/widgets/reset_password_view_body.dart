@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,6 +6,7 @@ import 'package:sign_lang_app/core/theming/styles.dart';
 import 'package:sign_lang_app/core/widgets/app_text_button.dart';
 import 'package:sign_lang_app/core/widgets/app_text_form_field.dart';
 import 'package:sign_lang_app/core/widgets/custom_button_animation.dart';
+import 'package:sign_lang_app/core/widgets/top_snackbar.dart';
 import 'package:sign_lang_app/features/auth/data/models/reset_password_model.dart';
 import 'package:sign_lang_app/features/auth/domain/usecases/reset_password_usecase.dart';
 import 'package:sign_lang_app/features/auth/presentation/manager/reset_password_cubit/reset_password_cubit.dart';
@@ -70,7 +72,14 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
           BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
               listener: (context, state) {
             if (state is ResetPasswordSuccessState) {
-              //Navigator.pop(context);
+              TopSnackBar.show(
+                  context,
+                  title:  'Password Reset ',
+                  message:
+                      'password eeset success',
+                  contentType: ContentType.success,
+                  color: Colors.green,
+               );
             }
           }, builder: (context, state) {
             return AppTextButton(
