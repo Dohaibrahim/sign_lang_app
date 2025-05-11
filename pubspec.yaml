@@ -63,6 +63,7 @@ dependencies:
   page_transition: ^2.1.0
   flutter_native_splash: ^2.4.4
   youtube_player_flutter: ^9.1.1
+  audioplayers: ^5.2.1
 
   firebase_core: ^3.13.0
   firebase_messaging: ^15.2.5
@@ -112,6 +113,7 @@ flutter:
     - assets/animations/
     - assets/3d_models/
     - assets/videos/
+    - assets/sound/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

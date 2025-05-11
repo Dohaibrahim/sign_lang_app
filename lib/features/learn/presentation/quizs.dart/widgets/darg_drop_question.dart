@@ -79,7 +79,7 @@ class _DragDropQuestionState extends State<DragDropQuestion> {
                   color: Theme.of(context).colorScheme.primaryContainer,
                 ),
               ),
-              QuestionsTracker(totalQ: widget.question.options.length),
+              QuestionsTracker(totalQ: 6),
             ],
           ),
           Padding(
@@ -90,9 +90,18 @@ class _DragDropQuestionState extends State<DragDropQuestion> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Flexible(
-                      child: DragDropQuestionItem(
-                        widget.question.signUrls[index],
-                      ),
+                      child: widget.question.signUrls.isNotEmpty && index < widget.question.signUrls.length
+                          ? DragDropQuestionItem(
+                              widget.question.signUrls[index],
+                            )
+                          : Container(
+                              width: 100,
+                              height: 100,
+                              color: Colors.grey[300],
+                              child: const Center(
+                                child: Text('No image available'),
+                              ),
+                            ),
                     ),
                     DragTarget<String>(
                       key: ValueKey('${widget.question.id}-$index'),
