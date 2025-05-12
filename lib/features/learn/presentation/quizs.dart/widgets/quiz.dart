@@ -1,10 +1,10 @@
+
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:sign_lang_app/core/widgets/top_snackbar.dart';
-import 'package:sign_lang_app/features/learn/data/models/question_response.dart'
-    as model; // Use alias 'model'
+import 'package:sign_lang_app/features/learn/data/models/question_response.dart' as model;
 import 'package:sign_lang_app/features/learn/presentation/manager/score_tracker_cubit/score_tracker_cubit.dart';
 import 'package:sign_lang_app/features/learn/presentation/quizs.dart/widgets/answer.dart';
 import 'package:sign_lang_app/features/learn/presentation/quizs.dart/widgets/darg_drop_question.dart';
@@ -59,13 +59,29 @@ class _QuizState extends State<Quiz> {
     try {
       if (_audioPlayer != null) {
         print('Attempting to play sound...');
-        await _audioPlayer?.play(AssetSource('sound/sonido-correcto-331225.mp3'));
+        await _audioPlayer?.play(AssetSource('sound/success.mp3'));
         print('Sound play initiated');
       }
     } catch (e) {
       print('Error playing sound: $e');
     }
   }
+
+  Future<void> _playFailureSound() async {
+  if (!_isAudioInitialized) {
+    await _initializeAudio();
+  }
+
+  try {
+    if (_audioPlayer != null) {
+      print('Attempting to play failure sound...');
+      await _audioPlayer?.play(AssetSource('sound/error.mp3'));
+      print('Failure sound play initiated');
+    }
+  } catch (e) {
+    print('Error playing failure sound: $e');
+  }
+}
 
   @override
   void initState() {
@@ -156,6 +172,7 @@ class _QuizState extends State<Quiz> {
                   color: const Color(0xff19A7CE),
                 );
               } else {
+                _playFailureSound();
                 TopSnackBar.show(
                   context,
                   title: 'Oops 😕',
