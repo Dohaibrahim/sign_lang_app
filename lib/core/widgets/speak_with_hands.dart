@@ -5,8 +5,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sign_lang_app/core/theming/styles.dart';
 
 class SpeakWithHands extends StatelessWidget {
-  const SpeakWithHands({super.key, this.onTap});
+  const SpeakWithHands({super.key, this.onTap,  required this.image, required this.color});
   final void Function()? onTap;
+  final String image;final Color color;
+
   @override
   Widget build(BuildContext context) {
     return FadeInLeft(
@@ -20,12 +22,20 @@ class SpeakWithHands extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 25),
-                child: SvgPicture.asset(
-                  "assets/images/Rectangle 2493.svg",
-                  // ignore: deprecated_member_use
-                  fit: BoxFit.fill,
-                  width: MediaQuery.sizeOf(context).width,
-                ),
+child: Container(
+  decoration: BoxDecoration(
+   borderRadius: BorderRadius.circular(15),
+   color: color
+  ),
+),
+
+                // child: SvgPicture.asset(
+                //   containerback,
+                //   // "assets/images/Rectangle 2493.svg",
+                //   // ignore: deprecated_member_use
+                //   fit: BoxFit.fill,
+                //   width: MediaQuery.sizeOf(context).width,
+                // ),
               ),
               // ignore: prefer_const_constructors
               Positioned(
@@ -34,7 +44,8 @@ class SpeakWithHands extends StatelessWidget {
                 left: 200,
                 bottom: 0,
                 child: Image.asset(
-                  "assets/images/onboarding3.png",
+                  // "assets/images/onboarding3.png",
+                  image
                 ),
               ),
 

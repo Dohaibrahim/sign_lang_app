@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,6 +12,8 @@ import 'package:sign_lang_app/features/home_page/widgets/home_app_bar.dart';
 import 'package:sign_lang_app/core/widgets/speak_with_hands.dart';
 import 'package:sign_lang_app/features/home_page/widgets/services_widget.dart';
 import 'package:sign_lang_app/features/learn/presentation/widgets/questions_tracker.dart';
+import 'package:sign_lang_app/core/routing/routes.dart';
+
 import '../../core/utils/sharedprefrence.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -29,11 +32,11 @@ class HomeViewBody extends StatelessWidget {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 return Center(
-                    child: Text(
-                  'Error: ${snapshot.error}',
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.onPrimary),
-                ));
+                  child: Text(
+                    'Error: ${snapshot.error}',
+                    style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+                  ),
+                );
               } else {
                 String userName = snapshot.data ?? 'User';
                 return Column(
@@ -43,14 +46,66 @@ class HomeViewBody extends StatelessWidget {
                       title: 'Good Morning',
                       subtitle: userName,
                     ),
-                    const SizedBox(height: 160, child: SpeakWithHands()),
+
+                    // Carousel Slider with SpeakWithHands repeated
+                    SizedBox(
+                      height: 160,
+                      child: CarouselSlider.builder(
+                        itemCount: 3,
+                        itemBuilder: (context, index, realIndex) {
+                          switch (index) {
+                            case 0:
+                              return SpeakWithHands(
+                                onTap: () {
+                                  Navigator.pushNamed(context, Routes.CategoriesView);
+                                },
+                                image: 'assets/images/onboarding3.png',
+                                color: const Color(0xff156DE6),
+                              );
+                            case 1:
+                              return SpeakWithHands(
+                                onTap: () {
+                                  Navigator.pushNamed(context, Routes.learnInstructionsWelcomeMsgView);
+                                },
+                                image: 'assets/images/avatar2.png',
+                                color: const Color(0xff19A7CE),
+                              );
+                            case 2:
+                              return SpeakWithHands(
+                                onTap: () {
+                                  Navigator.pushNamed(context, Routes.dictionaryScreen);
+                                },
+                                image: 'assets/images/avatar2.png',
+                                color: const Color(0xff17A155),
+                              );
+                            default:
+                              return SpeakWithHands(
+                                onTap: () {
+                                  Navigator.pushNamed(context, Routes.CategoriesView);
+                                },
+                                image: 'assets/images/onboarding3.png',
+                                color: const Color(0xff156DE6),
+                              );
+                          }
+                        },
+                        options: CarouselOptions(
+                          autoPlay: true,
+                          height: 250,
+                          enlargeCenterPage: true,
+                          viewportFraction: 1,
+                          autoPlayInterval: const Duration(seconds: 3),
+                        ),
+                      ),
+                    ),
+
                     const SizedBox(height: 10),
                     SizedBox(
                       height: 40,
                       child: Text(
                         'Services',
                         style: TextStyles.font20WhiteSemiBold.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary),
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
                       ),
                     ),
                     const ServicesWidget(),
@@ -78,6 +133,7 @@ class HomeViewBody extends StatelessWidget {
     );
   }
 }
+
 
 class YourProgressItem extends StatelessWidget {
   const YourProgressItem({super.key});
