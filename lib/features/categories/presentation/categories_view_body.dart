@@ -17,7 +17,6 @@ class CategoriesViewBody extends StatelessWidget {
     final List<String> imagePaths = [
       'assets/images/intoduce_your_self.svg',
       'assets/images/bodyParts.svg',
-
       'assets/images/Group 36873.svg',
     // 'assets/images/body_parts.svg'
       'assets/images/favourites.svg',
