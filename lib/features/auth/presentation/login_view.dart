@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sign_lang_app/core/errors/build_error.dart';
@@ -5,6 +6,7 @@ import 'package:sign_lang_app/core/routing/routes.dart';
 import 'package:sign_lang_app/core/utils/extentions.dart';
 import 'package:sign_lang_app/core/utils/profile_image_service.dart';
 import 'package:sign_lang_app/core/widgets/custom_background_color.dart';
+import 'package:sign_lang_app/core/widgets/top_snackbar.dart' show TopSnackBar;
 import 'package:sign_lang_app/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:sign_lang_app/features/auth/presentation/widgets/login_view_body.dart';
 import 'package:sign_lang_app/features/notification/cloud_notification/data/data_source/notification_remote_data_source.dart';
@@ -31,15 +33,27 @@ class LoginView extends StatelessWidget {
                 Routes.bottomNavigation,
                 arguments: args,
               );
-              buildErrorBar(context, state.message);
+ TopSnackBar.show(
+                  context,
+                  title:  'User Created ',
+                  message: 'User Account Created Success ',
+                  contentType: ContentType.success,
+                  color: Color(0xff19A7CE),
+                );
+
               await NotificationRepoImpl(
                       notificationRemoteDataSource:
                           NotificationRemoteDataSourceImpl())
                   .subscribeToTopic('daily_updates');
             }
             if (state is LoginFailure) {
-              buildErrorBar(context, state.errorMessage);
-            }
+TopSnackBar.show(
+                   context,
+                  title:  'Error ',
+                  message: state.errorMessage,
+                  contentType: ContentType.failure,
+                  color: Colors.red,
+                );            }
           },
           child: dark ? _isDarkTheme() : _isLightTheme()),
     );

@@ -19,21 +19,20 @@ class FetchDictionaryListCubit extends Cubit<FetchDictionaryListState> {
     }
 
     var result = await fetchDictionaryListUsecase.call(pageNumber);
-    result.fold(
-      (failure) {
-        if (pageNumber == 1) {
-          emit(FetchDictionaryListFailure(failure.toString()));
-        } else {
-          emit(FetchDictionaryListPaginationFailure(
-              errMessage: failure.toString()));
-        }
-        print(failure.toString());
-      },
-      (dictionaryList) {
-        emit(FetchDictionaryListSuccess(dictionaryList));
-      },
-    );
 
-    return;
-  }
-}
+   result.fold(
+  (failure) {
+    final errorMsg = failure.message;
+    if (pageNumber == 1) {
+      emit(FetchDictionaryListFailure(errorMsg.toString()));
+    } else {
+      emit(FetchDictionaryListPaginationFailure(errMessage: errorMsg));
+    }
+    print("❌ Dictionary fetch failed: $errorMsg");
+  },
+  (dictionaryList) {
+    emit(FetchDictionaryListSuccess(dictionaryList));
+  },
+);
+
+  }}

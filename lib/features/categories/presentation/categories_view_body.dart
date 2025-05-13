@@ -1,8 +1,13 @@
+
 import 'dart:developer';
+
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sign_lang_app/core/routing/routes.dart';
+import 'package:sign_lang_app/core/theming/styles.dart';
 import 'package:sign_lang_app/core/utils/extentions.dart';
 import 'package:sign_lang_app/features/categories/data/models/category_res.dart';
 import 'package:sign_lang_app/features/categories/presentation/manager/cubit/categories_cubit.dart';
@@ -12,7 +17,6 @@ class CategoriesViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Define a list of image paths
     final List<String> imagePaths = [
       "assets/images/Group 36855 (4).png",
       "assets/images/Frame 3 (1).png",
@@ -25,40 +29,33 @@ class CategoriesViewBody extends StatelessWidget {
       'assets/images/Frame 4.png'
     ];
 
-    return GridViewBlocConsumer(imagePaths: imagePaths);
+    return ListViewBlocConsumer(imagePaths: imagePaths);
   }
 }
 
-class GridViewBlocConsumer extends StatefulWidget {
-  const GridViewBlocConsumer({
-    super.key,
-    required this.imagePaths,
-  });
-
+class ListViewBlocConsumer extends StatefulWidget {
+  const ListViewBlocConsumer({super.key, required this.imagePaths});
   final List<String> imagePaths;
 
   @override
-  State<GridViewBlocConsumer> createState() => _GridViewBlocConsumerState();
+  State<ListViewBlocConsumer> createState() => _ListViewBlocConsumerState();
 }
 
-class _GridViewBlocConsumerState extends State<GridViewBlocConsumer> {
-  List<CategoryModel> CategoriesList = [];
-
+class _ListViewBlocConsumerState extends State<ListViewBlocConsumer> {
   @override
   Widget build(BuildContext context) {
-    // Trigger fetching categories when the widget is built
     context.read<CategoriesCubit>().fetchDictionaryList();
 
     return BlocConsumer<CategoriesCubit, CategoriesState>(
       listener: (context, state) {
         if (state is CategoriesFailure) {
-          // Optionally show a snackbar or dialog with the error message
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-                content: Text(
-              state.errMessage,
-              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
-            )),
+              content: Text(
+                state.errMessage,
+                style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+              ),
+            ),
           );
         }
       },
