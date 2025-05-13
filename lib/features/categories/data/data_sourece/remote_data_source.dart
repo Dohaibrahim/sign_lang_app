@@ -27,7 +27,8 @@ class CategoriesRemoteDataSourceImpl extends CategoriesRemoteDataSource {
       return Right(categories);
     } catch (e) {
       // Return the error wrapped in Left
-      return Left(Failure(e.toString()));
+      return Left(
+          Failure('error in categories remote data source : ${e.toString()}'));
     }
   }
 

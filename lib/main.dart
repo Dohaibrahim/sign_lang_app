@@ -21,10 +21,11 @@ import 'firebase_options.dart';
 
 void main() async {
   final widgetsFlutterBinding = WidgetsFlutterBinding.ensureInitialized();
+  setupServiceLocator();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  setupServiceLocator();
+
   //await NotificationRemoteDataSourceImpl().initFirebase();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsFlutterBinding);
   // Retrieve user token from SharedPreferences
@@ -87,7 +88,7 @@ class _MyAppState extends State<MyApp> {
     // Handle stream (app already running)
     uriLinkStream.listen((Uri? uri) {
       log(uri.toString());
-      if (uri != null && uri.host == 'reset-password') {
+      if (uri != null && uri.host == 'res0et-password') {
         //&&
         //uri.pathSegments.isNotEmpty) {
         Navigator.pushReplacementNamed(context, Routes.resetPassword);
