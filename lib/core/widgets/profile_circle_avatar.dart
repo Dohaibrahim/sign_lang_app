@@ -79,7 +79,8 @@ class _ProfileCircleAvatarState extends State<ProfileCircleAvatar> {
   Widget _buildInitials() {
     return Text(
       widget.currentUserName.substring(0, 2).toUpperCase(),
-      style: const TextStyle(color: Colors.white, fontSize: 23),
+      style: TextStyle(
+          color: Theme.of(context).colorScheme.onPrimary, fontSize: 23),
     );
   }
 }

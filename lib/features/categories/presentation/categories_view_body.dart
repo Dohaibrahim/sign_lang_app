@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sign_lang_app/core/routing/routes.dart';
@@ -17,8 +19,10 @@ class CategoriesViewBody extends StatelessWidget {
       "assets/images/Frame 5.png",
       //'assets/images/Frame 4.png',
       'assets/images/Frame 6.png',
-      'assets/images/public_blaces.svg',
-      'assets/images/nature.svg',
+      //'assets/images/public_blaces.svg',
+      //'assets/images/nature.svg',
+      'assets/images/avatar.png',
+      'assets/images/Frame 4.png'
     ];
 
     return GridViewBlocConsumer(imagePaths: imagePaths);
@@ -65,8 +69,9 @@ class _GridViewBlocConsumerState extends State<GridViewBlocConsumer> {
           return CategoriesMap(
             item: (BuildContext context, int index) {
               return CategoriesItem(
-                category: state.categories[index],
                 imagePath: widget.imagePaths[index % widget.imagePaths.length],
+                category: state.categories[index],
+                //imagePath: widget.imagePaths[index % widget.imagePaths.length],
               );
             },
             itemsLength: state.categories.length,
@@ -99,9 +104,12 @@ class CategoriesItem extends StatelessWidget {
         //height: 200,
         child: GestureDetector(
           onTap: () {
+            log(category.id);
+            log(category.name);
             context.pushNamed(Routes.LevelsView, arguments: {
               'categoryId': category.id,
-              'categoryName': category.name
+              'categoryName': category.name,
+              'categoryImage': imagePath
             }
                 // Pass category ID as an argument
                 );

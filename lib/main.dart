@@ -12,8 +12,6 @@ import 'package:sign_lang_app/core/routing/routes.dart';
 import 'package:sign_lang_app/core/utils/constants.dart';
 import 'package:sign_lang_app/core/utils/sharedprefrence.dart';
 import 'package:sign_lang_app/core/utils/simple_bloc_observer.dart';
-import 'package:sign_lang_app/features/auth/presentation/forget_password_view.dart';
-import 'package:sign_lang_app/features/auth/presentation/reset_password_view.dart';
 import 'package:sign_lang_app/features/dictionary/domain/entities/dictionary_entity.dart';
 import 'package:sign_lang_app/features/notification/local_notification/local_notification.dart';
 import 'package:sign_lang_app/features/setting/presentation/manager/theme_cubit/theme_cubit.dart';
@@ -23,10 +21,11 @@ import 'firebase_options.dart';
 
 void main() async {
   final widgetsFlutterBinding = WidgetsFlutterBinding.ensureInitialized();
+  setupServiceLocator();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  setupServiceLocator();
+
   //await NotificationRemoteDataSourceImpl().initFirebase();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsFlutterBinding);
   // Retrieve user token from SharedPreferences
@@ -89,7 +88,7 @@ class _MyAppState extends State<MyApp> {
     // Handle stream (app already running)
     uriLinkStream.listen((Uri? uri) {
       log(uri.toString());
-      if (uri != null && uri.host == 'reset-password') {
+      if (uri != null && uri.host == 'res0et-password') {
         //&&
         //uri.pathSegments.isNotEmpty) {
         Navigator.pushReplacementNamed(context, Routes.resetPassword);

@@ -134,6 +134,7 @@ class _PickProfileImageState extends State<PickProfileImage> {
 
   TextButton buildTextButton(BuildContext context) {
     return TextButton(
+      style: ButtonStyle(),
       onPressed: () async {
         await getImageFromGallery();
         if (_image != null) {
@@ -148,9 +149,10 @@ class _PickProfileImageState extends State<PickProfileImage> {
           _loadLocalProfileImage();
         }
       },
-      child: const Text(
+      child: Text(
         'Change Picture',
-        style: TextStyle(color: Colors.white, fontSize: 15),
+        style: TextStyle(
+            color: Theme.of(context).colorScheme.onPrimary, fontSize: 15),
       ),
     );
   }
