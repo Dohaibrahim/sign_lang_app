@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:sign_lang_app/core/utils/constants.dart';
 import 'package:sign_lang_app/core/utils/extentions.dart';
 import 'package:sign_lang_app/core/utils/sharedprefrence.dart';
-
 import 'package:sign_lang_app/features/setting/presentation/manager/theme_cubit/theme_cubit.dart';
 import 'package:sign_lang_app/features/setting/presentation/widgets/contact_us.dart';
 import 'package:sign_lang_app/features/setting/presentation/widgets/custom_setting_app_bar.dart';
 import 'package:sign_lang_app/features/setting/presentation/widgets/setting_item.dart';
 import '../../../../core/routing/routes.dart';
 
-class SettingViewBody extends StatelessWidget {
-  const SettingViewBody({
-    super.key,
-  });
+class SettingViewBody extends StatefulWidget {
+  const SettingViewBody({super.key});
 
+  @override
+  State<SettingViewBody> createState() => _SettingViewBodyState();
+}
+
+class _SettingViewBodyState extends State<SettingViewBody> {
   @override
   Widget build(BuildContext context) {
     bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
@@ -38,10 +39,12 @@ class SettingViewBody extends StatelessWidget {
           ),
           SettingItem(
             title: 'Edit Profile',
-            //imagePath: 'assets/icons/edit_info.png',
             imagePath: 'assets/icons/edit-profile.png',
-            onTap: () {
-              Navigator.pushNamed(context, Routes.editInfoview);
+            onTap: () async {
+              await Navigator.pushNamed(context, Routes.editInfoview);
+              if (mounted) {
+                setState(() {});
+              }
             },
           ),
           SettingItem(
@@ -57,11 +60,12 @@ class SettingViewBody extends StatelessWidget {
             backIcon: false,
             onTap: () {
               showModalBottomSheet(
-                  backgroundColor: const Color(0xff19221D),
-                  context: context,
-                  builder: (context) {
-                    return const ContactUs();
-                  });
+                backgroundColor: const Color(0xff19221D),
+                context: context,
+                builder: (context) {
+                  return const ContactUs();
+                },
+              );
             },
           ),
           SettingItem(
@@ -84,9 +88,10 @@ class SettingViewBody extends StatelessWidget {
               await SharedPrefHelper.removeData(SharedPrefKeys.userToken);
               await SharedPrefHelper.removeData(
                   SharedPrefKeys.profileImagePath);
-              context.pushNamedAndRemoveUntil(Routes.loginScreen,
-                  predicate: (Route<dynamic> route) =>
-                      false); // Remove all previous routes)
+              context.pushNamedAndRemoveUntil(
+                Routes.loginScreen,
+                predicate: (Route<dynamic> route) => false,
+              );
             },
           ),
         ],

@@ -24,80 +24,102 @@ class _ChangePasswordViewBodyState extends State<ChangePasswordViewBody> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   late String oldPassword, newPassword;
   @override
-  Widget build(BuildContext context) {
-    final Map<String, dynamic>? arguments =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    String userEmail = arguments?['userEmail'];
+  @override
+Widget build(BuildContext context) {
+  final Map<String, dynamic>? arguments =
+      ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+  String userEmail = arguments?['userEmail'];
 
-    double height = MediaQuery.sizeOf(context).height;
-    return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 30.sp),
-        child: Form(
-          key: formKey,
-          autovalidateMode: autovalidateMode,
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            SizedBox(height: height * 0.15),
-            Text(
-              "Change Password",
-              style: TextStyles.font32PrimaryExtraBold.copyWith(fontSize: 40),
-            ),
-            Text(
-              'Edit your password',
-              style: TextStyles.font16GraySemibold.copyWith(fontSize: 22),
-            ),
-            SizedBox(
-              height: 30.h,
-            ),
-            /*AppTextFormField(
-              hintText: 'Email',
-              initialValue: userEmail,
-              onSaved: (value) {
-                userEmail = value!;
-              },
-            ),*/
-            const SizedBox(height: 20),
-            AppTextFormField(
-              hintText: 'old password',
-              onSaved: (value) {
-                oldPassword = value!;
-              },
-            ),
-            const SizedBox(height: 20),
-            AppTextFormField(
-              hintText: 'new password',
-              onSaved: (value) {
-                newPassword = value!;
-              },
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            BlocBuilder<ChangePasswordCubit, ChangePasswordState>(
-              builder: (context, state) {
-                return LoadingButton(
-                  title: 'Change Password',
-                  onTap: () async {
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
+  double height = MediaQuery.sizeOf(context).height;
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 30.sp),
+    child: Form(
+      key: formKey,
+      autovalidateMode: autovalidateMode,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(height: height * 0.15),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start, // Align items at the top
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
+                children: [
+                  Text(
+                    "Change Password",
+                    style: TextStyles.font32PrimaryExtraBold.copyWith(fontSize: 40),
+                  ),
+                  Text(
+                    'Edit your password',
+                    style: TextStyles.font16GraySemibold.copyWith(fontSize: 22),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 30.h,
+          ),
+          /*AppTextFormField(
+            hintText: 'Email',
+            initialValue: userEmail,
+            onSaved: (value) {
+              userEmail = value!;
+            },
+          ),*/
+          const SizedBox(height: 20),
+          AppTextFormField(
+            hintText: 'old password',
+            onSaved: (value) {
+              oldPassword = value!;
+            },
+          ),
+          const SizedBox(height: 20),
+          AppTextFormField(
+            hintText: 'new password',
+            onSaved: (value) {
+              newPassword = value!;
+            },
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          BlocBuilder<ChangePasswordCubit, ChangePasswordState>(
+            builder: (context, state) {
+              return LoadingButton(
+                title: 'Change Password',
+                onTap: () async {
+                  if (formKey.currentState!.validate()) {
+                    formKey.currentState!.save();
 
-                      context.read<ChangePasswordCubit>().execute(
-                          usecase: getIt<ChangePasswordUsecase>(),
-                          params: ChangePasswordReq(
-                              email: userEmail,
-                              oldPassword: oldPassword,
-                              newPassword: newPassword));
+                    context.read<ChangePasswordCubit>().execute(
+                        usecase: getIt<ChangePasswordUsecase>(),
+                        params: ChangePasswordReq(
+                            email: userEmail,
+                            oldPassword: oldPassword,
+                            newPassword: newPassword));
 
-                      // Update shared preferences
-                      await SharedPrefHelper.setData(
-                          SharedPrefKeys.userEmail, userEmail);
-                    }
-                  },
-                  btnKey: ChangePasswordCubit.get(context).btnKey,
-                );
-              },
-            )
-          ]),
-        ));
-  }
-}
+                    // Update shared preferences
+                    await SharedPrefHelper.setData(
+                        SharedPrefKeys.userEmail, userEmail);
+                  }
+                },
+                btnKey: ChangePasswordCubit.get(context).btnKey,
+              );
+            },
+          )
+        ],
+      ),
+    ),
+  );
+}}

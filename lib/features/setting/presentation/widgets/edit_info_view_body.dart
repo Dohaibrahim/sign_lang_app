@@ -53,15 +53,37 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            
             SizedBox(height: height * 0.12),
-            Text(
-              "Edit Profile",
-              style: TextStyles.font32PrimaryExtraBold.copyWith(fontSize: 40),
-            ),
-            Text(
-              'Edit your profile',
-              style: TextStyles.font16GraySemibold.copyWith(fontSize: 22),
-            ),
+
+           Row(
+  crossAxisAlignment: CrossAxisAlignment.start, // Align items at the start vertically
+  children: [
+    IconButton(
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+      icon: Icon(
+        Icons.arrow_back_ios_new,
+        color: Theme.of(context).colorScheme.onPrimary,
+      ),
+    ),
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
+      children: [
+        Text(
+          "Edit Profile",
+          style: TextStyles.font32PrimaryExtraBold.copyWith(fontSize: 40),
+        ),
+        Text(
+          'Edit your profile',
+          style: TextStyles.font16GraySemibold.copyWith(fontSize: 22),
+        ),
+      ],
+    ),
+  ],
+),
+           
             SizedBox(
               height: 30.h,
             ),

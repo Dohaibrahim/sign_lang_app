@@ -150,7 +150,7 @@ class _PickProfileImageState extends State<PickProfileImage> {
       },
       child: const Text(
         'Change Picture',
-        style: TextStyle(color: Colors.white, fontSize: 15),
+        style: TextStyle(color: Colors.grey, fontSize: 15),
       ),
     );
   }

@@ -16,7 +16,6 @@ import 'package:sign_lang_app/features/dictionary/domain/entities/dictionary_ent
 import 'package:sign_lang_app/features/notification/local_notification/local_notification.dart';
 import 'package:sign_lang_app/features/setting/presentation/manager/theme_cubit/theme_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:uni_links/uni_links.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -68,33 +67,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _handleDeepLinks(context);
-    });
   }
-
-  void _handleDeepLinks(BuildContext context) async {
-    // Handle initial link
-    final initialUri = await getInitialUri();
-    log(initialUri.toString());
-    if (initialUri != null &&
-        initialUri.host == 'reset-password' &&
-        initialUri.pathSegments.isNotEmpty) {
-      Navigator.pushReplacementNamed(context, Routes.resetPassword);
-    }
-
-    // Handle stream (app already running)
-    uriLinkStream.listen((Uri? uri) {
-      log(uri.toString());
-      if (uri != null && uri.host == 'reset-password') {
-        //&&
-        //uri.pathSegments.isNotEmpty) {
-        Navigator.pushReplacementNamed(context, Routes.resetPassword);
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
