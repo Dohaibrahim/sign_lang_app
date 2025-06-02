@@ -15,9 +15,9 @@ class CustomSettingAppBar extends StatelessWidget
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      toolbarHeight: 100, // Set the height of the AppBar
+      toolbarHeight: 100, 
       title: FutureBuilder<Map<String, String?>>(
-        future: _getUserInfo(), // Fetch user info
+        future: _getUserInfo(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

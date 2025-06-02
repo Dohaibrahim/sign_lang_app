@@ -41,10 +41,11 @@ class _SettingViewBodyState extends State<SettingViewBody> {
             title: 'Edit Profile',
             imagePath: 'assets/icons/edit-profile.png',
             onTap: () async {
-              await Navigator.pushNamed(context, Routes.editInfoview);
-              if (mounted) {
-                setState(() {});
-              }
+             final updated = await Navigator.pushNamed(context, Routes.editInfoview);
+if (updated == true && mounted) {
+  setState(() {}); // يعمل ريبلد بعد التعديل
+}
+
             },
           ),
           SettingItem(
