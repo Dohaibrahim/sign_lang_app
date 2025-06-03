@@ -76,6 +76,7 @@ dependencies:
   dotted_border: ^2.1.0
   uni_links: ^0.5.1
   firebase_dynamic_links: ^6.1.5
+  intl: ^0.20.2
 
 
 

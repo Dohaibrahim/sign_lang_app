@@ -502,6 +502,7 @@ import 'package:sign_lang_app/features/levels/presentation/levels_view.dart';
 import 'package:sign_lang_app/features/learn/presentation/manager/score_tracker_cubit/score_tracker_cubit.dart';
 import 'package:sign_lang_app/features/learn/presentation/quizs.dart/quiz_view.dart';
 import 'package:sign_lang_app/features/levels/presentation/manager/levels_cubit.dart';
+import 'package:sign_lang_app/features/notification/local_notification/presentation/notification_view.dart';
 import 'package:sign_lang_app/features/onboarding/onboarding_view.dart';
 import 'package:sign_lang_app/features/setting/presentation/manager/add_image_cubit/add_image_cubit.dart';
 import 'package:sign_lang_app/features/translation/presentation/before_translation_view.dart';
@@ -571,6 +572,9 @@ class AppRouter {
                 child: const EditInfoView(),
               ));
         }
+
+      case Routes.notificationsView:
+        return MaterialPageRoute(builder: (_) => const NotificationView());
 
       /* PageNavAnimation.applyPageAnimation(
             screen: BlocProvider(

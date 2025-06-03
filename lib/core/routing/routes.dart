@@ -26,6 +26,6 @@ class Routes {
   static const String changePassword = '/ChangePassword';
   static const String quiz = '/quiz';
   static const String beforeTranslationScreen = '/beforeTranslationScreen';
-
+  static const String notificationsView = '/notificationsView';
   //static const String commonWordsView = '/CommonWordsView';
 }

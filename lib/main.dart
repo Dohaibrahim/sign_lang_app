@@ -14,6 +14,7 @@ import 'package:sign_lang_app/core/utils/sharedprefrence.dart';
 import 'package:sign_lang_app/core/utils/simple_bloc_observer.dart';
 import 'package:sign_lang_app/features/dictionary/domain/entities/dictionary_entity.dart';
 import 'package:sign_lang_app/features/notification/local_notification/local_notification.dart';
+import 'package:sign_lang_app/features/notification/local_notification/notification_model.dart';
 import 'package:sign_lang_app/features/setting/presentation/manager/theme_cubit/theme_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:uni_links/uni_links.dart';
@@ -40,7 +41,9 @@ void main() async {
       await SharedPrefHelper.getBool(SharedPrefKeys.onboardingCompleted);
 
   Hive.registerAdapter(DictionaryEntityAdapter());
+  Hive.registerAdapter(NotificationModelAdapter());
   await Hive.initFlutter();
+  await Hive.openBox<NotificationModel>('notificationsBox');
   await Hive.openBox<DictionaryEntity>(KDictionaryBox);
   await Hive.openBox<DictionaryEntity>(KSavedwordsBox);
   Bloc.observer = SimpleBlocObserver();

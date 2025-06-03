@@ -9,8 +9,6 @@ import 'package:sign_lang_app/core/widgets/custom_background_color.dart';
 import 'package:sign_lang_app/core/widgets/top_snackbar.dart' show TopSnackBar;
 import 'package:sign_lang_app/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:sign_lang_app/features/auth/presentation/widgets/login_view_body.dart';
-import 'package:sign_lang_app/features/notification/cloud_notification/data/data_source/notification_remote_data_source.dart';
-import 'package:sign_lang_app/features/notification/cloud_notification/domain/repo/notification_repo.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -33,27 +31,23 @@ class LoginView extends StatelessWidget {
                 Routes.bottomNavigation,
                 arguments: args,
               );
- TopSnackBar.show(
-                  context,
-                  title:  'User Created ',
-                  message: 'User Account Created Success ',
-                  contentType: ContentType.success,
-                  color: Color(0xff19A7CE),
-                );
-
-              await NotificationRepoImpl(
-                      notificationRemoteDataSource:
-                          NotificationRemoteDataSourceImpl())
-                  .subscribeToTopic('daily_updates');
+              TopSnackBar.show(
+                context,
+                title: 'User Created ',
+                message: 'User Account Created Success ',
+                contentType: ContentType.success,
+                color: Color(0xff19A7CE),
+              );
             }
             if (state is LoginFailure) {
-TopSnackBar.show(
-                   context,
-                  title:  'Error ',
-                  message: state.errorMessage,
-                  contentType: ContentType.failure,
-                  color: Colors.red,
-                );            }
+              TopSnackBar.show(
+                context,
+                title: 'Error ',
+                message: state.errorMessage,
+                contentType: ContentType.failure,
+                color: Colors.red,
+              );
+            }
           },
           child: dark ? _isDarkTheme() : _isLightTheme()),
     );

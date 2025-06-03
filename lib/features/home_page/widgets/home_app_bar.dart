@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sign_lang_app/core/routing/routes.dart';
 import 'package:sign_lang_app/core/theming/styles.dart';
 import 'package:sign_lang_app/core/widgets/profile_circle_avatar.dart';
 
@@ -26,7 +27,11 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       subtitle: Text(subtitle,
           style: TextStyle(
               color: Theme.of(context).colorScheme.onPrimary, fontSize: 20)),
-      trailing: SvgPicture.asset('assets/images/notification.svg'),
+      trailing: GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, Routes.notificationsView);
+          },
+          child: SvgPicture.asset('assets/images/notification.svg')),
     );
   }
 }
