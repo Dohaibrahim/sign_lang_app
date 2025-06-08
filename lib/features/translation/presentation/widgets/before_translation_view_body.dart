@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sign_lang_app/core/theming/styles.dart';
+import 'package:sign_lang_app/core/widgets/app_text_button.dart';
 
 class BeforeTranslationViewBody extends StatelessWidget {
   const BeforeTranslationViewBody({super.key});
@@ -48,6 +49,17 @@ class BeforeTranslationViewBody extends StatelessWidget {
             BuildText(
               text: 'clear background',
             ),
+            SizedBox(
+              height: screenHeight * 0.10,
+            ),
+            AppTextButton(
+                buttonHeight: 60,
+                buttonText: 'Next',
+                textStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600),
+                onPressed: () {})
           ],
         ),
       ),
