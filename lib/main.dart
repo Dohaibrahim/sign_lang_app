@@ -85,7 +85,7 @@ class _MyAppState extends State<MyApp> {
     if (initialUri != null &&
         initialUri.host == 'reset-password' &&
         initialUri.pathSegments.isNotEmpty) {
-      Navigator.pushReplacementNamed(context, Routes.resetPassword);
+      Navigator.pushReplacementNamed(context, Routes.forgetPassword);
     }
 
     // Handle stream (app already running)
@@ -94,7 +94,7 @@ class _MyAppState extends State<MyApp> {
       if (uri != null && uri.host == 'res0et-password') {
         //&&
         //uri.pathSegments.isNotEmpty) {
-        Navigator.pushReplacementNamed(context, Routes.resetPassword);
+        Navigator.pushReplacementNamed(context, Routes.forgetPassword);
       }
     });
   }

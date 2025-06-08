@@ -6,9 +6,10 @@ class ForgetPasswordLoadingState extends ForgetPasswordState {}
 
 class ForgetPasswordSuccessState extends ForgetPasswordState {
   final String message;
-  final String token;
 
-  ForgetPasswordSuccessState({required this.message, required this.token});
+  ForgetPasswordSuccessState({
+    required this.message,
+  });
 }
 
 class ForgetPasswordFailureState extends ForgetPasswordState {

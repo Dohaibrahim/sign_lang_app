@@ -20,7 +20,6 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
       }, (data) {
         emit(ForgetPasswordSuccessState(
           message: data.msg,
-          token: data.token,
         ));
       });
     } catch (e) {

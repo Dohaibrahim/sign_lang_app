@@ -6,7 +6,9 @@ class ResetPasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final token = ModalRoute.of(context)!.settings.arguments as String;
-    return Scaffold(body: ResetPasswordViewBody(token: token));
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    return Scaffold(
+        body: ResetPasswordViewBody(otp: args["otp"], email: args["email"]));
   }
 }

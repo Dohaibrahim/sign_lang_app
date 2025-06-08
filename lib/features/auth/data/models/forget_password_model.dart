@@ -10,11 +10,12 @@ class ForgetPasswordReq {
 
 class ForgetPasswordResponse {
   final String msg;
-  final String token;
 
-  ForgetPasswordResponse({required this.msg, required this.token});
+  ForgetPasswordResponse({required this.msg});
 
   factory ForgetPasswordResponse.fromMap(Map<String, dynamic> json) {
-    return ForgetPasswordResponse(msg: json['msg'], token: json['token']);
+    return ForgetPasswordResponse(
+      msg: json['msg'],
+    );
   }
 }

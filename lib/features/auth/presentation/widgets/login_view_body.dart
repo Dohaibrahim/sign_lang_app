@@ -78,7 +78,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                           .copyWith(color: ColorsManager.primaryColor),
                     ),
                     onTap: () {
-                      Navigator.pushNamed(context, Routes.resetPassword);
+                      Navigator.pushNamed(context, Routes.forgetPassword);
                     },
                   ),
                 ),

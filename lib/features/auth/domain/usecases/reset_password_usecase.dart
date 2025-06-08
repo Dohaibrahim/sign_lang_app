@@ -7,11 +7,11 @@ import 'package:sign_lang_app/features/auth/domain/repos/auth_repo.dart';
 
 class ResetPasswordUsecase
     extends UseCase<ResetPasswordResponse, ResetPasswordReq> {
-  final String token;
-  ResetPasswordUsecase({required this.token});
   @override
   Future<Either<Failure, ResetPasswordResponse>> call(
       [ResetPasswordReq? param]) async {
-    return await getIt<AuthRepo>().resetPassword(param!, token);
+    return await getIt<AuthRepo>().resetPassword(
+      param!,
+    );
   }
 }
