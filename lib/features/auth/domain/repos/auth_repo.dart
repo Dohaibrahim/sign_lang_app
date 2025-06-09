@@ -16,5 +16,5 @@ abstract class AuthRepo {
       ForgetPasswordReq forgetPasswordReq);
 
   Future<Either<Failure, ResetPasswordResponse>> resetPassword(
-      ResetPasswordReq resetPasswordReq, String token);
+      ResetPasswordReq resetPasswordReq);
 }

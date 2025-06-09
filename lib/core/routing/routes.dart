@@ -8,7 +8,7 @@ class Routes {
   static const String homescreen = '/homescreen';
   static const String loginScreen = '/loginView';
   static const String registerScreen = '/registerScreen';
-  static const String resetPassword = '/resetPassword';
+  static const String forgetPassword = '/resetPassword';
   static const String aboutUsView = '/aboutUsView';
   static const String SettingView = '/SettingView';
   static const String DictionaryDetailsView = '/DictionaryDetailsView';
@@ -26,6 +26,7 @@ class Routes {
   static const String changePassword = '/ChangePassword';
   static const String quiz = '/quiz';
   static const String beforeTranslationScreen = '/beforeTranslationScreen';
-
+  static const String notificationsView = '/notificationsView';
+  static const String otpView = '/otpView';
   //static const String commonWordsView = '/CommonWordsView';
 }

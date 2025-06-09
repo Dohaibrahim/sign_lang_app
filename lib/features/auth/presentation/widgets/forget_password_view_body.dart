@@ -1,9 +1,12 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sign_lang_app/core/di/dependency_injection.dart';
+import 'package:sign_lang_app/core/routing/routes.dart';
 import 'package:sign_lang_app/core/theming/styles.dart';
 import 'package:sign_lang_app/core/widgets/app_text_button.dart';
 import 'package:sign_lang_app/core/widgets/app_text_form_field.dart';
+import 'package:sign_lang_app/core/widgets/top_snackbar.dart';
 import 'package:sign_lang_app/features/auth/data/models/forget_password_model.dart';
 import 'package:sign_lang_app/features/auth/domain/usecases/forget_password_usecase.dart';
 import 'package:sign_lang_app/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
@@ -22,7 +25,7 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
 
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
-  String? email, token;
+  String? email;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -69,10 +72,15 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
             BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
               listener: (context, state) {
                 if (state is ForgetPasswordSuccessState) {
-                  token = state.token;
-                  /*Navigator.pushReplacementNamed(
-                      context, Routes.newPasswordView,
-                      arguments: token);*/
+                  TopSnackBar.show(
+                    context,
+                    title: state.message,
+                    message: 'Please check your email',
+                    contentType: ContentType.success,
+                    color: Color(0xff19A7CE),
+                  );
+                  Navigator.pushNamed(context, Routes.otpView,
+                      arguments: email);
                 }
               },
               builder: (context, state) {

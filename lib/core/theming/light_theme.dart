@@ -19,7 +19,8 @@ ColorScheme colorScheme = ColorScheme.light(
     surfaceContainer: Colors.grey[200],
     tertiary: ColorsManager
         .primaryColor, // Starting color // const Color(0xFF91F39E),
-    onTertiary: const Color(0xFF03A9F4)
+    onTertiary: const Color(0xFF03A9F4),
+    inverseSurface: Colors.grey[450]
     //secondary: Colors.grey
     //secondary: Color.fromARGB(255, 8, 40, 48),
     //surface: Colors.white,

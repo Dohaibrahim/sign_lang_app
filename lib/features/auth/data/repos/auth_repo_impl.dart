@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:sign_lang_app/core/di/dependency_injection.dart';
 import 'package:sign_lang_app/core/errors/failure.dart';
@@ -42,7 +44,6 @@ class AuthRepoImpl extends AuthRepo {
     try {
       final result =
           await getIt<AuthRemoteDataSource>().forgetPassword(forgetPasswordReq);
-
       return result.fold((failure) {
         return Left(failure);
       }, (data) {
@@ -55,10 +56,10 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<Either<Failure, ResetPasswordResponse>> resetPassword(
-      ResetPasswordReq resetPasswordReq, String token) async {
+      ResetPasswordReq resetPasswordReq) async {
     try {
-      var result = await getIt<AuthRemoteDataSource>()
-          .resetPassword(resetPasswordReq, token);
+      var result =
+          await getIt<AuthRemoteDataSource>().resetPassword(resetPasswordReq);
       return result.fold((failure) {
         return Left(failure);
       }, (data) {

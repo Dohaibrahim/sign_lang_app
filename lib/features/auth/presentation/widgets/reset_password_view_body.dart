@@ -2,6 +2,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sign_lang_app/core/routing/routes.dart';
 import 'package:sign_lang_app/core/theming/styles.dart';
 import 'package:sign_lang_app/core/widgets/app_text_button.dart';
 import 'package:sign_lang_app/core/widgets/app_text_form_field.dart';
@@ -12,11 +13,12 @@ import 'package:sign_lang_app/features/auth/domain/usecases/reset_password_useca
 import 'package:sign_lang_app/features/auth/presentation/manager/reset_password_cubit/reset_password_cubit.dart';
 import 'package:sign_lang_app/features/auth/presentation/manager/reset_password_cubit/reset_password_state.dart';
 import 'package:sign_lang_app/features/auth/presentation/widgets/custom_app_bar.dart';
-import 'package:sign_lang_app/features/auth/presentation/widgets/loading_button.dart';
 
 class ResetPasswordViewBody extends StatefulWidget {
-  const ResetPasswordViewBody({super.key, required this.token});
-  final String token;
+  const ResetPasswordViewBody(
+      {super.key, required this.otp, required this.email});
+  final String otp, email;
+
   @override
   State<ResetPasswordViewBody> createState() => _ResetPasswordViewBodyState();
 }
@@ -73,13 +75,13 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
               listener: (context, state) {
             if (state is ResetPasswordSuccessState) {
               TopSnackBar.show(
-                  context,
-                  title:  'Password Reset ',
-                  message:
-                      'password eeset success',
-                  contentType: ContentType.success,
-                  color: Colors.green,
-               );
+                context,
+                title: 'Password Reset ',
+                message: 'password eeset success',
+                contentType: ContentType.success,
+                color: Colors.green,
+              );
+              Navigator.pushReplacementNamed(context, Routes.loginScreen);
             }
           }, builder: (context, state) {
             return AppTextButton(
@@ -90,26 +92,14 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                   if (key.currentState!.validate()) {
                     key.currentState!.save();
                     context.read<ResetPasswordCubit>().resetPassword(
-                        ResetPasswordReq(password: password!),
-                        ResetPasswordUsecase(token: widget.token));
+                        ResetPasswordReq(
+                            password: password!,
+                            email: widget.email,
+                            otp: widget.otp),
+                        ResetPasswordUsecase());
                   }
                 });
           }),
-
-          /*LoadingButton(
-                    btnKey: btnKey,
-                    title: 'Done',
-                    // textStyle: TextStyles.font14DarkBlueMedium
-                    //    .copyWith(fontWeight: FontWeight.w700),
-                    onTap: () {
-                      if (key.currentState!.validate()) {
-                        key.currentState!.save();
-                        context.read<ResetPasswordCubit>().resetPassword(
-                            ResetPasswordReq(password: password!),
-                            ResetPasswordUsecase(token: widget.token));
-                      }
-                    });
-              },*/
         ]),
       ),
     );

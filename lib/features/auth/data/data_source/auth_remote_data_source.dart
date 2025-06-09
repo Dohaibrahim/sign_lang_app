@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:sign_lang_app/core/di/dependency_injection.dart';
@@ -19,7 +21,7 @@ abstract class AuthRemoteDataSource {
   Future<Either<Failure, ForgetPasswordResponse>> forgetPassword(
       ForgetPasswordReq forgetPasswordReq);
   Future<Either<Failure, ResetPasswordResponse>> resetPassword(
-      ResetPasswordReq resetPasswordReq, String token);
+      ResetPasswordReq resetPasswordReq);
 }
 
 class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
@@ -119,10 +121,10 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
 
   @override
   Future<Either<Failure, ResetPasswordResponse>> resetPassword(
-      ResetPasswordReq resetPasswordReq, String token) async {
+      ResetPasswordReq resetPasswordReq) async {
     try {
       var request = await getIt<DioClient>().post(
-        '${ApiUrls.resetPassword}/$token',
+        ApiUrls.resetPassword,
         data: resetPasswordReq.toMap(),
       );
 

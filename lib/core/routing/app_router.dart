@@ -472,7 +472,9 @@ import 'package:sign_lang_app/core/routing/routes.dart';
 import 'package:sign_lang_app/core/utils/api_service.dart';
 import 'package:sign_lang_app/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
 import 'package:sign_lang_app/features/auth/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:sign_lang_app/features/auth/presentation/manager/reset_password_cubit/reset_password_cubit.dart';
 import 'package:sign_lang_app/features/auth/presentation/manager/signup_cubit/signup_cubit.dart';
+import 'package:sign_lang_app/features/auth/presentation/otp_view.dart';
 import 'package:sign_lang_app/features/auth/presentation/reset_password_view.dart';
 import 'package:sign_lang_app/features/auth/presentation/forget_password_view.dart';
 import 'package:sign_lang_app/features/auth/presentation/widgets/reset_password_view_body.dart';
@@ -502,6 +504,7 @@ import 'package:sign_lang_app/features/levels/presentation/levels_view.dart';
 import 'package:sign_lang_app/features/learn/presentation/manager/score_tracker_cubit/score_tracker_cubit.dart';
 import 'package:sign_lang_app/features/learn/presentation/quizs.dart/quiz_view.dart';
 import 'package:sign_lang_app/features/levels/presentation/manager/levels_cubit.dart';
+import 'package:sign_lang_app/features/notification/local_notification/presentation/notification_view.dart';
 import 'package:sign_lang_app/features/onboarding/onboarding_view.dart';
 import 'package:sign_lang_app/features/setting/presentation/manager/add_image_cubit/add_image_cubit.dart';
 import 'package:sign_lang_app/features/translation/presentation/before_translation_view.dart';
@@ -571,6 +574,9 @@ class AppRouter {
                 child: const EditInfoView(),
               ));
         }
+
+      case Routes.notificationsView:
+        return MaterialPageRoute(builder: (_) => const NotificationView());
 
       /* PageNavAnimation.applyPageAnimation(
             screen: BlocProvider(
@@ -726,7 +732,7 @@ class AppRouter {
             child: const LoginView(),
           ));
         }
-      case Routes.resetPassword:
+      case Routes.forgetPassword:
         if (Platform.isIOS) {
           return CupertinoPageRoute(
               builder: (builder) => BlocProvider(
@@ -736,12 +742,19 @@ class AppRouter {
           return PageNavAnimation.applyPageAnimation(
               screen: BlocProvider(
                   create: (context) => ForgetPasswordCubit(),
-                  child: const ResetPasswordView()));
+                  child: const ForgetPasswordView()));
         }
 
       case Routes.newPasswordView:
         return MaterialPageRoute(
-            builder: (_) => ResetPasswordView(), settings: settings);
+            builder: (_) => BlocProvider(
+                  create: (context) => ResetPasswordCubit(),
+                  child: ResetPasswordView(),
+                ),
+            settings: settings);
+
+      case Routes.otpView:
+        return MaterialPageRoute(builder: (_) => OtpView(), settings: settings);
 
       case Routes.changePassword:
         if (Platform.isIOS) {

@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hive/hive.dart';
+import 'package:sign_lang_app/features/notification/local_notification/notification_model.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz;
 
@@ -55,6 +59,23 @@ Future<void> showTestNotificationNow() async {
 }
 
 Future<void> scheduleDailyNotification() async {
+  final box = Hive.box<NotificationModel>('notificationsBox');
+
+  // Prevent duplication: check if today's notification already exists
+  final now = DateTime.now();
+  final today = DateTime(now.year, now.month, now.day);
+
+  bool alreadyScheduled = box.values.any((n) {
+    final nDate = DateTime(
+        n.scheduledTime.year, n.scheduledTime.month, n.scheduledTime.day);
+    return nDate == today;
+  });
+
+  if (alreadyScheduled) {
+    log("Today's notification already scheduled.");
+    return;
+  }
+
   const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
     'daily_channel_id',
     'Daily Notifications',
@@ -66,7 +87,6 @@ Future<void> scheduleDailyNotification() async {
   const NotificationDetails platformDetails =
       NotificationDetails(android: androidDetails);
 
-  // Schedule for 10:00 AM
   final tz.TZDateTime scheduledDate = _nextInstanceOfTime(10, 0);
 
   await flutterLocalNotificationsPlugin.zonedSchedule(
@@ -75,11 +95,14 @@ Future<void> scheduleDailyNotification() async {
     'Donnot forget to come back!',
     scheduledDate,
     platformDetails,
-    //androidAllowWhileIdle: true,
-    //uiLocalNotificationDateInterpretation:UILocalNotificationDateInterpretation.absoluteTime,
     matchDateTimeComponents: DateTimeComponents.time,
     androidScheduleMode: AndroidScheduleMode.exact,
   );
+  box.add(NotificationModel(
+    title: 'Daily Reminder!',
+    body: 'Donnot forget to come back!',
+    scheduledTime: scheduledDate.toLocal(),
+  ));
 }
 
 tz.TZDateTime _nextInstanceOfTime(int hour, int minute) {

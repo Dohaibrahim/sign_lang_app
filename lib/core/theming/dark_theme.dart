@@ -16,7 +16,8 @@ ColorScheme colorScheme = const ColorScheme.dark(
     primaryFixedDim: Color(0xff141F23), // the color of the button
     surfaceContainer: Color(0xff232229),
     tertiary: Color(0xFFB5D585),
-    onTertiary: Color(0xFF1FADFF));
+    onTertiary: Color(0xFF1FADFF),
+    inverseSurface: Color(0xff39464E));
 
 InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
   filled: true,
