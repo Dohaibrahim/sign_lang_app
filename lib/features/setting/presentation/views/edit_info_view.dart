@@ -33,6 +33,8 @@ class _EditInfoViewState extends State<EditInfoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.primaryFixed,
+
       body: currentUserName.isNotEmpty && currentUserEmail.isNotEmpty
           ? EditProfileViewBody(
               currentUserName: currentUserName,

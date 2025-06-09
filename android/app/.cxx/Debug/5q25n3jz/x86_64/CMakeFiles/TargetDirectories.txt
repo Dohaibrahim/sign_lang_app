@@ -1,0 +1,2 @@
+/Users/abdo/Desktop/untitled folder/sign_lang_app/android/app/.cxx/Debug/5q25n3jz/x86_64/CMakeFiles/edit_cache.dir
+/Users/abdo/Desktop/untitled folder/sign_lang_app/android/app/.cxx/Debug/5q25n3jz/x86_64/CMakeFiles/rebuild_cache.dir

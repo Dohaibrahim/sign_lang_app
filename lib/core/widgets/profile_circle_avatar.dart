@@ -40,13 +40,32 @@ class _ProfileCircleAvatarState extends State<ProfileCircleAvatar> {
       listener: (context, state) {
         if (state is AddImageSuccess) {
           _loadImageUrl();
-          log('messageeeee');
-          //setState(() {});
         }
       },
-      child: CircleAvatar(
-        radius: 40,
-        child: _buildImageContent(),
+      child: GestureDetector(
+        onTap: () {
+          if (_localImagePath != null && _localImagePath!.isNotEmpty) {
+            Navigator.push(
+              context,
+              PageRouteBuilder(
+                pageBuilder: (_, __, ___) => ImagePreviewScreen(
+                  imageUrl: _localImagePath!,
+                  tag: 'profile_image',
+                ),
+                transitionsBuilder: (_, animation, __, child) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+              ),
+            );
+          }
+        },
+        child: Hero(
+          tag: 'profile_image',
+          child: CircleAvatar(
+            radius: 40,
+            child: _buildImageContent(),
+          ),
+        ),
       ),
     );
   }
@@ -81,6 +100,36 @@ class _ProfileCircleAvatarState extends State<ProfileCircleAvatar> {
       widget.currentUserName.substring(0, 2).toUpperCase(),
       style: TextStyle(
           color: Theme.of(context).colorScheme.onPrimary, fontSize: 23),
+    );
+  }
+}
+
+class ImagePreviewScreen extends StatelessWidget {
+  final String imageUrl;
+  final String tag;
+
+  const ImagePreviewScreen({
+    super.key,
+    required this.imageUrl,
+    required this.tag,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: GestureDetector(
+        onTap: () => Navigator.pop(context),
+        child: Center(
+          child: Hero(
+            tag: tag,
+            child: CachedNetworkImage(
+              imageUrl: imageUrl,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
