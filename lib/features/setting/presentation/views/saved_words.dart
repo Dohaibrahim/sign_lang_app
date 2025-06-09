@@ -27,6 +27,8 @@ class _SavedWordsScreenState extends State<SavedWordsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+             backgroundColor: Theme.of(context).colorScheme.primaryFixed,
+
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: IconButton(

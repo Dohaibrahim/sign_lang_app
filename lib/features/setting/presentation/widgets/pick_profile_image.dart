@@ -151,8 +151,8 @@ class _PickProfileImageState extends State<PickProfileImage> {
       },
       child: Text(
         'Change Picture',
-        style: TextStyle(
-            color: Theme.of(context).colorScheme.onPrimary, fontSize: 15),
+        style: TextStyle(color: Colors.grey, fontSize: 15),
+
       ),
     );
   }

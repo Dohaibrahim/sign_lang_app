@@ -12,6 +12,7 @@ class ChangePasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       backgroundColor: Theme.of(context).colorScheme.primaryFixed,
       body: BlocListener<ChangePasswordCubit, ChangePasswordState>(
           listener: (context, state) {
             if (state is ChangePasswordFailure) {

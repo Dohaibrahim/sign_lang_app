@@ -34,6 +34,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
 
   late String userName;
   late String userEmail;
+  String? updatedImagePath; // لحفظ الصورة الجديدة مؤقتًا
 
   @override
   void initState() {
@@ -45,6 +46,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
+
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Form(
@@ -54,20 +56,46 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(height: height * 0.12),
-            Text(
-              "Edit Profile",
-              style: TextStyles.font32PrimaryExtraBold.copyWith(fontSize: 40),
+
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Edit Profile",
+                      style:
+                          TextStyles.font32PrimaryExtraBold.copyWith(fontSize: 40),
+                    ),
+                    Text(
+                      'Edit your profile',
+                      style:
+                          TextStyles.font16GraySemibold.copyWith(fontSize: 22),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            Text(
-              'Edit your profile',
-              style: TextStyles.font16GraySemibold.copyWith(fontSize: 22),
-            ),
-            SizedBox(
-              height: 30.h,
-            ),
+            SizedBox(height: 30.h),
+
+            // Pick profile image and capture path
             PickProfileImage(
               currentUserName: userName,
+              // onImageSelected: (path) {
+              //   updatedImagePath = path;
+              // },
             ),
+
             AppTextFormField(
               hintText: 'Name',
               initialValue: userName,
@@ -83,13 +111,17 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                 userEmail = value!;
               },
             ),
-            SizedBox(
-              height: 30.h,
-            ),
+            SizedBox(height: 30.h),
+
             BlocListener<EditInfoCubit, EditInfoState>(
-              listener: (context, state) {
+              listener: (context, state) async {
                 if (state is EditInfoSuccess) {
-                  context.pop();
+                  // // ✅ بعد نجاح التعديل، خزّن الصورة لو كانت اتغيرت
+                  // if (updatedImagePath != null) {
+                  //   await SharedPrefHelper.setData(
+                  //       SharedPrefKeys.profileImagePath, updatedImagePath);
+                  // }
+                  Navigator.pushNamed(context, Routes.SettingView); // نرجع true لما يحصل تعديل
                 }
               },
               child: BlocBuilder<EditInfoCubit, EditInfoState>(
@@ -99,7 +131,6 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
-                        // Update shared preferences
                         await SharedPrefHelper.setData(
                             SharedPrefKeys.username, userName);
                         await SharedPrefHelper.setData(
@@ -119,18 +150,23 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                 },
               ),
             ),
+
             MaterialButton(
               padding: EdgeInsets.zero,
-              highlightColor: Colors.transparent, // Color when pressed
-              splashColor: Colors.transparent, // Ripple effect color
+              highlightColor: Colors.transparent,
+              splashColor: Colors.transparent,
               onPressed: () {
-                context.pushNamed(Routes.changePassword,
-                    arguments: {'userEmail': userEmail});
+                context.pushNamed(
+                  Routes.changePassword,
+                  arguments: {'userEmail': userEmail},
+                );
               },
               child: Text(
                 'Change your password',
-                style: TextStyles.font32PrimaryExtraBold
-                    .copyWith(fontWeight: FontWeight.normal, fontSize: 18),
+                style: TextStyles.font32PrimaryExtraBold.copyWith(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18,
+                ),
               ),
             ),
           ],

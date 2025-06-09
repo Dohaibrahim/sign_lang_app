@@ -118,8 +118,11 @@ class _DictionaryListViewState extends State<DictionaryListView> {
     final RegExp regExp = RegExp(r'v=([a-zA-Z0-9_-]{11})');
     final match = regExp.firstMatch(url);
     if (match != null) {
-      return match.group(1)!;
+      final videoId = match.group(1)!;
+      print('🎥 Extracted video ID: $videoId from URL: $url');
+      return videoId;
     }
+    print('⚠️ No video ID found in URL: $url');
     return '';
   }
 

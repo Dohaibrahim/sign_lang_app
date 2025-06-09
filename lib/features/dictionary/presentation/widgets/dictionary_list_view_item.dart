@@ -25,6 +25,7 @@ class DictionaryListViewItem extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8),
       child: GestureDetector(
         onTap: () {
+          print('👆 Tapped item with video ID: $videoId');
           Navigator.push(
             context,
             MaterialPageRoute(
