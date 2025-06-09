@@ -19,10 +19,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 void main() async {
   final widgetsFlutterBinding = WidgetsFlutterBinding.ensureInitialized();
+  setupServiceLocator();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  setupServiceLocator();
+
   //await NotificationRemoteDataSourceImpl().initFirebase();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsFlutterBinding);
   // Retrieve user token from SharedPreferences
@@ -66,6 +67,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
   }
   @override
   Widget build(BuildContext context) {

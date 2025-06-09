@@ -460,6 +460,7 @@ case Routes.Guidebook:
 }
 */
 
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -797,18 +798,20 @@ class AppRouter {
 
       case Routes.LevelsView:
         final arguments = settings.arguments as Map<String, dynamic>;
-        final String categoryId = arguments['categoryId'];
-        final String categoryName = arguments['categoryName'];
-        final String categoryImage = arguments['categoryImage'];
-
+        final String? categoryId = arguments['categoryId'];
+        final String? categoryName = arguments['categoryName'];
+        final String? categoryImage = arguments['categoryImage'];
+        log(categoryId ?? '');
+        log(categoryName ?? '');
+        log(categoryImage ?? '');
         return MaterialPageRoute(
           builder: (builder) => BlocProvider(
             create: (context) => LevelsCubit(
               getIt<FetchLevelsUsecase>(),
-            )..fetchLevels(categoryId),
+            )..fetchLevels(categoryId ?? ''),
             child: LevelsView(
-              categoryName: categoryName,
-              categoryImage: categoryImage,
+              categoryName: categoryName ?? '',
+              categoryImage: categoryImage ?? '',
             ),
           ),
           settings: settings,
