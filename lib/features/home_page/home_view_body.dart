@@ -61,6 +61,7 @@ class HomeViewBody extends StatelessWidget {
                                 },
                                 image: 'assets/images/onboarding3.png',
                                 color: const Color(0xff156DE6),
+                                text: 'Speak with\nYour Hands',
                               );
                             case 1:
                               return SpeakWithHands(
@@ -69,6 +70,7 @@ class HomeViewBody extends StatelessWidget {
                                 },
                                 image: 'assets/images/avatar2.png',
                                 color: const Color(0xff19A7CE),
+                                text: 'Practice\nYour Skills',
                               );
                             case 2:
                               return SpeakWithHands(
@@ -77,6 +79,7 @@ class HomeViewBody extends StatelessWidget {
                                 },
                                 image: 'assets/images/avatar2.png',
                                 color: const Color(0xff17A155),
+                                text: 'Sign Language\nDictionary',
                               );
                             default:
                               return SpeakWithHands(
@@ -85,6 +88,7 @@ class HomeViewBody extends StatelessWidget {
                                 },
                                 image: 'assets/images/onboarding3.png',
                                 color: const Color(0xff156DE6),
+                                text: 'Learn Sign\nLanguage',
                               );
                           }
                         },

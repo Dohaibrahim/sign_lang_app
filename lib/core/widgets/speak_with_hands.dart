@@ -5,9 +5,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sign_lang_app/core/theming/styles.dart';
 
 class SpeakWithHands extends StatelessWidget {
-  const SpeakWithHands({super.key, this.onTap,  required this.image, required this.color});
+  const SpeakWithHands({
+    super.key, 
+    this.onTap,  
+    required this.image, 
+    required this.color,
+    required this.text,
+  });
   final void Function()? onTap;
-  final String image;final Color color;
+  final String image;
+  final Color color;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +30,20 @@ class SpeakWithHands extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 25),
-child: Container(
-  decoration: BoxDecoration(
-   borderRadius: BorderRadius.circular(15),
-   color: color
-  ),
-),
-
-                // child: SvgPicture.asset(
-                //   containerback,
-                //   // "assets/images/Rectangle 2493.svg",
-                //   // ignore: deprecated_member_use
-                //   fit: BoxFit.fill,
-                //   width: MediaQuery.sizeOf(context).width,
-                // ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: color
+                  ),
+                ),
               ),
-              // ignore: prefer_const_constructors
+              // child: SvgPicture.asset(
+              //   containerback,
+              //   // "assets/images/Rectangle 2493.svg",
+              //   // ignore: deprecated_member_use
+              //   fit: BoxFit.fill,
+              //   width: MediaQuery.sizeOf(context).width,
+              // ),
               Positioned(
                 top: -1,
                 right: 1,
@@ -48,13 +54,12 @@ child: Container(
                   image
                 ),
               ),
-
               Positioned(
                 left: 20,
                 top: 50,
                 bottom: 10,
                 child: Text(
-                  'Speak With\nYour Hands',
+                  text,
                   style: TextStyles.font18WhiteSemiBold
                       .copyWith(fontWeight: FontWeight.w800, fontSize: 28),
                 ),
