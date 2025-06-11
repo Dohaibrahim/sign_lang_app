@@ -28,5 +28,6 @@ class Routes {
   static const String beforeTranslationScreen = '/beforeTranslationScreen';
   static const String notificationsView = '/notificationsView';
   static const String otpView = '/otpView';
+  static const String aiWebView = '/aiWebView';
   //static const String commonWordsView = '/CommonWordsView';
 }

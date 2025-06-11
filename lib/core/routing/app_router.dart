@@ -507,6 +507,7 @@ import 'package:sign_lang_app/features/levels/presentation/manager/levels_cubit.
 import 'package:sign_lang_app/features/notification/local_notification/presentation/notification_view.dart';
 import 'package:sign_lang_app/features/onboarding/onboarding_view.dart';
 import 'package:sign_lang_app/features/setting/presentation/manager/add_image_cubit/add_image_cubit.dart';
+import 'package:sign_lang_app/features/translation/ai_web_view.dart';
 import 'package:sign_lang_app/features/translation/presentation/before_translation_view.dart';
 
 import '../../features/auth/presentation/login_view.dart';
@@ -542,7 +543,10 @@ class AppRouter {
             builder: (_) => BlocProvider(
                 create: (context) => AddImageCubit(),
                 child: const SettingView()));
-
+  case Routes.aiWebView:
+        return MaterialPageRoute(
+          builder: (_) =>  WebViewCamera(),
+        );
       case Routes.DictionaryDetailsView:
         if (Platform.isIOS) {
           return CupertinoPageRoute(

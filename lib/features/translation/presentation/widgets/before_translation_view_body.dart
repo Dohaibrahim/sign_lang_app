@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sign_lang_app/core/routing/routes.dart';
 import 'package:sign_lang_app/core/theming/styles.dart';
 import 'package:sign_lang_app/core/widgets/app_text_button.dart';
 
@@ -59,7 +60,10 @@ class BeforeTranslationViewBody extends StatelessWidget {
                     color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.w600),
-                onPressed: () {})
+                onPressed: () {
+Navigator.pushNamed(context,Routes.aiWebView );
+
+                })
           ],
         ),
       ),
