@@ -53,6 +53,7 @@ class _WebViewCameraState extends State<WebViewCamera> {
             android: AndroidInAppWebViewOptions(
               useHybridComposition: true,
               supportMultipleWindows: true,
+              
             ),
             ios: IOSInAppWebViewOptions(
               allowsInlineMediaPlayback: true,

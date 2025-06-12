@@ -108,7 +108,7 @@ class GuideBookListViewItem extends StatelessWidget {
               width: 150,
               height: 150,
               child: gifUrl.isNotEmpty
-                  ? Image.network(ApiUrls.baseURL + gifUrl)
+                  ? Image.network(gifUrl)
                   : const Placeholder(),
             ),
           ),

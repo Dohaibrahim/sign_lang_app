@@ -4,6 +4,7 @@
     <application
         android:label="Synthima"
      android:usesCleartextTraffic="true"
+     android:hardwareAccelerated="true"
      android:enableOnBackInvokedCallback="true"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
