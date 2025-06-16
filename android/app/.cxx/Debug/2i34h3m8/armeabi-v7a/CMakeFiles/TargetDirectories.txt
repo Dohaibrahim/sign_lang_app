@@ -1,0 +1,2 @@
+/Users/abdo/Desktop/lastSign/sign_lang_app/android/app/.cxx/Debug/2i34h3m8/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/abdo/Desktop/lastSign/sign_lang_app/android/app/.cxx/Debug/2i34h3m8/armeabi-v7a/CMakeFiles/rebuild_cache.dir
