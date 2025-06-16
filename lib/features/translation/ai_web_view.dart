@@ -53,7 +53,6 @@ class _WebViewCameraState extends State<WebViewCamera> {
             android: AndroidInAppWebViewOptions(
               useHybridComposition: true,
               supportMultipleWindows: true,
-              
             ),
             ios: IOSInAppWebViewOptions(
               allowsInlineMediaPlayback: true,
@@ -64,21 +63,18 @@ class _WebViewCameraState extends State<WebViewCamera> {
             webViewController = controller;
             print("WebView created");
           },
-          androidOnPermissionRequest:
-              (controller, origin, resources) async {
+          androidOnPermissionRequest: (controller, origin, resources) async {
             print("Permission requested by WebView for: $resources");
             return PermissionRequestResponse(
               resources: resources,
               action: PermissionRequestResponseAction.GRANT,
             );
           },
-          onReceivedServerTrustAuthRequest:
-              (controller, challenge) async {
+          onReceivedServerTrustAuthRequest: (controller, challenge) async {
             return ServerTrustAuthResponse(
               action: ServerTrustAuthResponseAction.PROCEED,
             );
           },
-         
         ),
       ),
     );
