@@ -40,7 +40,7 @@ class _WebViewCameraState extends State<WebViewCamera> {
       body: SafeArea(
         child: InAppWebView(
           initialUrlRequest: URLRequest(
-            url: WebUri("https://a82a-102-41-245-34.ngrok-free.app/ai"),
+            url: WebUri("http://44.246.135.176:5173/realtime-translation"),
           ),
           initialOptions: InAppWebViewGroupOptions(
             crossPlatform: InAppWebViewOptions(

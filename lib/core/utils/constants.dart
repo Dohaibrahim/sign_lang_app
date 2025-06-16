@@ -5,7 +5,8 @@ const KSavedwordsBox = 'SavedwordsBox';
 
 class ApiUrls {
   //static const baseURL = "http://10.0.2.2:3000"; // android emulator
-  static const baseURL = 'http://127.0.0.1:3000';
+  // static const baseURL = 'http://127.0.0.1:3000';
+  static const baseURL = 'http://44.246.135.176:3000';
   // static const String baseURL = "http://192.168.1.3:3000";
 
   //static const baseURL = 'http://localhost:3000';

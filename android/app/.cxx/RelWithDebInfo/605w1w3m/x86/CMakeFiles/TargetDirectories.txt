@@ -1,0 +1,2 @@
+/Users/abdo/Desktop/lastSign/sign_lang_app/android/app/.cxx/RelWithDebInfo/605w1w3m/x86/CMakeFiles/edit_cache.dir
+/Users/abdo/Desktop/lastSign/sign_lang_app/android/app/.cxx/RelWithDebInfo/605w1w3m/x86/CMakeFiles/rebuild_cache.dir
