@@ -40,7 +40,7 @@ class _WebViewCameraState extends State<WebViewCamera> {
       body: SafeArea(
         child: InAppWebView(
           initialUrlRequest: URLRequest(
-            url: WebUri("http://44.246.135.176:5173/realtime-translation"),
+            url: WebUri("https://mediapipe-client.onrender.com/ai"),
           ),
           initialOptions: InAppWebViewGroupOptions(
             crossPlatform: InAppWebViewOptions(

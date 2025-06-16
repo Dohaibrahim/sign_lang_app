@@ -18,7 +18,6 @@ import 'package:sign_lang_app/features/notification/local_notification/notificat
 import 'package:sign_lang_app/features/setting/presentation/manager/theme_cubit/theme_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-
 void main() async {
   final widgetsFlutterBinding = WidgetsFlutterBinding.ensureInitialized();
   setupServiceLocator();
